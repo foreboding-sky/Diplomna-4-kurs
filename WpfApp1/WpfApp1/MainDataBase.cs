@@ -94,9 +94,10 @@ namespace WpfApp1
                 foreach(var model in priceListModels)
                 {
                     var dbModel = db.PriceList_Items.Where(p => p.ID == model.ID).Include(p => p.Item).SingleOrDefault();
-                    dbModel.Item.Name = model.Item.Name;
-                    dbModel.Item.Price = model.Item.Price;
                     dbModel.Count = model.Count;
+                    var dbModelItem = db.Items.Find(model.Item.ID);
+                    dbModelItem.Name = model.Item.Name;
+                    dbModelItem.Price = model.Item.Price;
                 }
                 db.SaveChanges();
             }
