@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace WpfApp1
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    return db.PriceList_Items.ToList();
+                    return db.PriceList_Items.Include(s => s.Item).ToList();
+                    //return db.PriceList_Items.ToList();
                 }
             }
         }
@@ -91,7 +93,7 @@ namespace WpfApp1
             {
                 foreach(var model in priceListModels)
                 {
-                    var dbModel = db.PriceList_Items.Find(model.ID);
+                    var dbModel = db.PriceList_Items.Where(p => p.ID == model.ID).Include(p => p.Item).SingleOrDefault();
                     dbModel.Item.Name = model.Item.Name;
                     dbModel.Item.Price = model.Item.Price;
                     dbModel.Count = model.Count;

@@ -13,7 +13,7 @@
             <ColumnDefinition Width="75*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" 
+        <!--<DataGrid Grid.Column="0" 
                   IsReadOnly="True" 
                   ItemsSource="{Binding PriceList, UpdateSourceTrigger=PropertyChanged}"
                   AutoGenerateColumns="False"
@@ -23,7 +23,23 @@
                 <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Count}"/>
                 <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Price}"/>
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
+        <ListView x:Name="ItemsListView" ItemsSource="{Binding Path=PriceList}" SelectedItem="{Binding Path=SelectedPriceListItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="15*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock DataContext="{Binding Path=Item}" Text="{Binding Path=Name}" Grid.Column="0"/>
+                        <TextBlock DataContext="{Binding Path=Item}" Text="{Binding Path=Price}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Path=Count}" Grid.Column="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <StackPanel Grid.Column="1" >
             <Button Margin="2" Command="{Binding SaveCommand}">Зберегти</Button>
             <Grid>
@@ -37,11 +53,11 @@
             </Grid>
             <TextBlock TextAlignment="Center">Обраний елемент</TextBlock>
             <TextBlock Text="Назва товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBlock Text="Ціна товару" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Item.Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Кількість товару" Margin="5,0,5,5"/>
             <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
-            <TextBlock Text="Кількість товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
         </StackPanel>
     </Grid>
 </Page>
