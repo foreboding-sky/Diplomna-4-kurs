@@ -58,7 +58,7 @@ namespace WpfApp1
         {
             return new List<PriceList_Model>()
             {
-                new PriceList_Model("Test item", 2, 600)
+                new PriceList_Model()
             };
         }
         private List<Customers_Model> GetCustomersItems()

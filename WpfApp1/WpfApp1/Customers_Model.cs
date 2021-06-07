@@ -13,6 +13,8 @@ namespace WpfApp1
         public string Tel { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+
+        public List<Purchase_model> Orders { get; set; }
         public Customers_Model()
         {
             Name = "";
