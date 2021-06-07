@@ -22,10 +22,7 @@ namespace WpfApp1
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
-            // использование Fluent API
             base.OnModelCreating(mb);
-
-            mb.Entity<PriceList_Model>().HasMany(pl => pl.Items);
 
             mb.Entity<Customers_Model>().HasMany(c => c.Orders).WithOne(p => p.Customer).OnDelete(DeleteBehavior.Cascade);
 

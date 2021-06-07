@@ -91,10 +91,10 @@ namespace WpfApp1
             {
                 foreach(var model in priceListModels)
                 {
-                    var item = db.PriceList_Items.Find(model.ID);
-                    item.Name = model.Name;
-                    item.Count = model.Count;
-                    item.Price = model.Price;
+                    var dbModel = db.PriceList_Items.Find(model.ID);
+                    dbModel.Item.Name = model.Item.Name;
+                    dbModel.Item.Price = model.Item.Price;
+                    dbModel.Count = model.Count;
                 }
                 db.SaveChanges();
             }
