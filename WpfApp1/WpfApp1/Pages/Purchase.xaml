@@ -1,0 +1,67 @@
+﻿<Page x:Class="WpfApp1.Pages.Purchase"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Purchase">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <!--<DataGrid Grid.Column="0" 
+                  IsReadOnly="True" 
+                  ItemsSource="{Binding PriceList, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedPriceListItem}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Назва" Width="70*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Count}"/>
+                <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+        <ListView x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Purchase}" SelectedItem="{Binding Path=SelectedPurchaseItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock DataContext="{Binding Path=Customer}" Text="{Binding Path=Name}" Grid.Column="0" />
+                        <TextBlock DataContext="{Binding Path=PurchaseItems.Item}" Text="{Binding Path=Name}" Grid.Column="1"/>
+                        <TextBlock DataContext="{Binding Path=PurchaseItems.Item}" Text="{Binding Path=Price}" Grid.Column="1"/>
+                        <TextBlock DataContext="{Binding Path=PurchaseItems}" Text="{Binding Path=Count}" Grid.Column="2"/>
+                        <TextBlock Text="{Binding Path=TotalPrice}" Grid.Column="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="1" >
+            <Button Margin="2" Command="{Binding SaveCommand}">Зберегти</Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="21*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="2,2,2,2" Command="{Binding AddCommand}">Додати</Button>
+                <Button Grid.Column="1" Margin="2,2,2,2" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedPriceListItem}" Grid.ColumnSpan="2">Видалити</Button>
+            </Grid>
+            <TextBlock TextAlignment="Center">Обраний елемент</TextBlock>
+            <TextBlock Text="Назва товару" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBlock Text="Ціна товару" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Item.Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBlock Text="Кількість товару" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+        </StackPanel>
+    </Grid>
+</Page>

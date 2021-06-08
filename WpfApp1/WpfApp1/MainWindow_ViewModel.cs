@@ -54,5 +54,17 @@ namespace WpfApp1
                   }));
             }
         }
+        private RelayCommand showPurchases;
+        public RelayCommand ShowPurchases
+        {
+            get
+            {
+                return showPurchases ??
+                  (showPurchases = new RelayCommand(obj =>
+                  {
+                      CurrentPage = new Pages.Purchase();
+                  }));
+            }
+        }
     }
 }

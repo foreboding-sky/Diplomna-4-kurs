@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +29,10 @@ namespace WpfApp1
         public int ID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
-        public int PriceListId { get; set; }
+        public int PriceListID{ get; set; }
         public PriceList_Model PriceList { get; set; }
+        //public int PurchaseItemID { get; set; }
+        //public PurchaseItem PurchaseItem { get; set; }
         public Item_Model()
         {
             Name = "";
