@@ -95,9 +95,19 @@ namespace WpfApp1
                 {
                     var dbModel = db.PriceList_Items.Where(p => p.ID == model.ID).Include(p => p.Item).SingleOrDefault();
                     dbModel.Count = model.Count;
-                    var dbModelItem = db.Items.Find(model.Item.ID);
-                    dbModelItem.Name = model.Item.Name;
-                    dbModelItem.Price = model.Item.Price;
+                    var dbModelItem = db.Items.Where(p => p.ID == model.Item.ID).FirstOrDefault();
+                    if (dbModelItem != null)
+                    {
+                        dbModelItem.Name = model.Item.Name;
+                        dbModelItem.Price = model.Item.Price;
+                    }
+                    else
+                    {
+                        dbModelItem = new Item_Model();
+                        dbModelItem.Name = model.Item.Name;
+                        dbModelItem.Price = model.Item.Price;
+                        db.Items.Add(dbModelItem);
+                    }
                 }
                 db.SaveChanges();
             }

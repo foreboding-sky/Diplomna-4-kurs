@@ -29,11 +29,11 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="70*"/>
                             <ColumnDefinition Width="15*"/>
                             <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock DataContext="{Binding Path=Item}" Text="{Binding Path=Name}" Grid.Column="0"/>
+                        <TextBlock DataContext="{Binding Path=Item}" Text="{Binding Path=Name}" Grid.Column="0" />
                         <TextBlock DataContext="{Binding Path=Item}" Text="{Binding Path=Price}" Grid.Column="1"/>
                         <TextBlock Text="{Binding Path=Count}" Grid.Column="2"/>
                     </Grid>

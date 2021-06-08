@@ -28,6 +28,8 @@ namespace WpfApp1
         public int ID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
+        public int PriceListId { get; set; }
+        public PriceList_Model PriceList { get; set; }
         public Item_Model()
         {
             Name = "";
