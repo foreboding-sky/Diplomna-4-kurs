@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Price}"/>
             </DataGrid.Columns>
         </DataGrid>-->
-        <ListView x:Name="ItemsListView" ItemsSource="{Binding Path=PriceList}" SelectedItem="{Binding Path=SelectedPriceListItem}">
+        <ListView x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=PriceList}" SelectedItem="{Binding Path=SelectedPriceListItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

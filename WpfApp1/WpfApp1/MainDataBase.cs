@@ -40,6 +40,16 @@ namespace WpfApp1
                 }
             }
         }
+        public List<Purchase_Model> Purchase_List
+        {
+            get
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    return db.Purchase_Items.ToList();
+                }
+            }
+        }
         public MainDataBase()
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -141,6 +151,62 @@ namespace WpfApp1
                     item.Tel = model.Tel;
                     item.Email = model.Email;
                     item.Address = model.Address;
+                }
+                db.SaveChanges();
+            }
+        }
+        #endregion
+        #region Purchase
+        public void AddPurchase()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Purchase_Items.Add(new Purchase_Model());
+                db.SaveChanges();
+            }
+        }
+        public void DeletePurchase(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Purchase_Items.Remove(db.Purchase_Items.First(t => t.ID == id));
+                db.SaveChanges();
+            }
+        }
+        public void SavePurchase(List<Purchase_Model> purchaseModels)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                foreach (var model in purchaseModels)
+                {
+                    var dbModel = db.Purchase_Items.Where(p => p.Customer.ID == model.Customer.ID).Include(p => p.Customer).SingleOrDefault();
+                    dbModel.Customer = model.Customer;
+                    foreach(var purchaseItem in dbModel.PurchaseItems)
+                    {
+                        var dbPurchaseItem = db.PurchaseItem_Items.Where(p => p.ID == purchaseItem.ID).Include(p=>p.Item).SingleOrDefault();
+                        if(dbPurchaseItem != null)
+                        {
+                            dbPurchaseItem = purchaseItem;
+                        }
+                        else
+                        {
+                            dbPurchaseItem = new PurchaseItem();
+                            dbPurchaseItem = purchaseItem;
+                        }
+                        //var dbItem = db.Items.Where(p => p.ID == purchaseItem.Item.ID).FirstOrDefault();
+                        //if (dbItem != null)
+                        //{
+                        //    dbItem.Name = purchaseItem.Item.Name;
+                        //    dbItem.Price = purchaseItem.Item.Price;
+                        //}
+                        //else
+                        //{
+                        //    dbItem = new Item_Model();
+                        //    dbItem.Name = purchaseItem.Item.Name;
+                        //    dbItem.Price = purchaseItem.Item.Price;
+                        //    db.Items.Add(dbItem);
+                        //}
+                    }
                 }
                 db.SaveChanges();
             }
