@@ -12,9 +12,9 @@
             <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical">
-            <Button Command="{Binding ShowPriceList}">Прайс лист</Button>
-            <Button Command="{Binding ShowCustomers}">Замовники</Button>
-            <Button Command="{Binding ShowPurchases}">Замовлення</Button>
+            <Button Height="30" Command="{Binding ShowPriceList}">Прайс лист</Button>
+            <Button Height="30" Command="{Binding ShowCustomers}">Замовники</Button>
+            <Button Height="30" Command="{Binding ShowPurchases}">Замовлення</Button>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Column="1" Content="{Binding CurrentPage}"/>
     </Grid>

@@ -45,7 +45,7 @@ namespace WpfApp1
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    return db.Purchase_Items.ToList();
+                    return db.Purchase_Items.Include(p => p.Customer).ToList();
                 }
             }
         }

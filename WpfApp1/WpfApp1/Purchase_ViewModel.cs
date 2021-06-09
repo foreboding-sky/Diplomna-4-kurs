@@ -19,25 +19,7 @@ namespace WpfApp1
             set
             {
                 selectedPurchaseItem = value;
-                OnPropertyChanged("SelectedPurchaseItem");
-            }
-        }
-        private Customers_Model selectedCustomer;
-        public Customers_Model SelectedCustomer
-        {
-            get
-            {
-                return selectedCustomer;
-            }
-            set
-            {
-                if (selectedPurchaseItem != null)
-                    selectedCustomer = selectedPurchaseItem.Customer;
-                else
-                    selectedCustomer = value;
-                if (selectedPurchaseItem != null)
-                    selectedPurchaseItem.Customer = selectedCustomer;
-                OnPropertyChanged("SelectedCustomer");
+                OnPropertyChanged("Customers");
                 OnPropertyChanged("SelectedPurchaseItem");
             }
         }

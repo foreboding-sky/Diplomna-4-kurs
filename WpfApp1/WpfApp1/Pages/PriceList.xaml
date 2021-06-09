@@ -13,7 +13,7 @@
             <ColumnDefinition Width="75*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <!--<DataGrid Grid.Column="0" 
+        <DataGrid Grid.Column="0" 
                   IsReadOnly="True" 
                   ItemsSource="{Binding PriceList, UpdateSourceTrigger=PropertyChanged}"
                   AutoGenerateColumns="False"
@@ -23,8 +23,8 @@
                 <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Count}"/>
                 <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Price}"/>
             </DataGrid.Columns>
-        </DataGrid>-->
-        <ListView x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=PriceList}" SelectedItem="{Binding Path=SelectedPriceListItem}">
+        </DataGrid>
+        <!--<ListView x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=PriceList}" SelectedItem="{Binding Path=SelectedPriceListItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -39,7 +39,7 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
         <StackPanel Grid.Column="1" >
             <Button Margin="2" Command="{Binding SaveCommand}">Зберегти</Button>
             <Grid>
