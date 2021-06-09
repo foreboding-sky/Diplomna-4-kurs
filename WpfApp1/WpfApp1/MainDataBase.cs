@@ -25,8 +25,7 @@ namespace WpfApp1
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    return db.PriceList_Items.Include(s => s.Item).ToList();
-                    //return db.PriceList_Items.ToList();
+                    return db.PriceList_Items.ToList();
                 }
             }
         }
@@ -87,9 +86,14 @@ namespace WpfApp1
         }
         private List<Purchase_Model> GetPurchaseItems()
         {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                List<Purchase_Model> purchases = new List<Purchase_Model>();
+                purchases.Add(new Purchase_Model { Customer = db.Customers_Items.FirstOrDefault() });
+            }
             return new List<Purchase_Model>()
             {
-                new Purchase_Model("Test", 10, 2)
+                
             };
         }
         #region PriceList
@@ -115,21 +119,10 @@ namespace WpfApp1
             {
                 foreach(var model in priceListModels)
                 {
-                    var dbModel = db.PriceList_Items.Where(p => p.ID == model.ID).Include(p => p.Item).SingleOrDefault();
+                    var dbModel = db.PriceList_Items.Where(p => p.ID == model.ID).SingleOrDefault();
+                    dbModel.Name = model.Name;
+                    dbModel.Price = model.Price;
                     dbModel.Count = model.Count;
-                    var dbModelItem = db.Items.Where(p => p.ID == model.Item.ID).FirstOrDefault();
-                    if (dbModelItem != null)
-                    {
-                        dbModelItem.Name = model.Item.Name;
-                        dbModelItem.Price = model.Item.Price;
-                    }
-                    else
-                    {
-                        dbModelItem = new Item_Model();
-                        dbModelItem.Name = model.Item.Name;
-                        dbModelItem.Price = model.Item.Price;
-                        db.Items.Add(dbModelItem);
-                    }
                 }
                 db.SaveChanges();
             }

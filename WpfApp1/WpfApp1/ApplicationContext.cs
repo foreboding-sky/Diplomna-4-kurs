@@ -15,7 +15,6 @@ namespace WpfApp1
         }
         public DbSet<PriceList_Model> PriceList_Items { get; set; }
         public DbSet<Customers_Model> Customers_Items { get; set; }
-        public DbSet<Item_Model> Items { get; set; }
         public DbSet<Purchase_Model> Purchase_Items { get; set; }
         public DbSet<PurchaseItem> PurchaseItem_Items { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,8 +27,7 @@ namespace WpfApp1
             base.OnModelCreating(mb);
 
             mb.Entity<Customers_Model>().HasMany(c => c.Orders).WithOne(p => p.Customer).OnDelete(DeleteBehavior.Cascade);
-            mb.Entity<PriceList_Model>().HasOne(c => c.Item);
-            mb.Entity<PurchaseItem>().HasOne(p => p.Item);
+            mb.Entity<PurchaseItem>().HasOne(p => p.Item).WithOne(p => p.PurchaseItem).HasForeignKey<PurchaseItem>(p => p.PuchaseID);
             mb.Entity<PurchaseItem>().HasOne(p => p.Purchase).WithMany(p => p.PurchaseItems);
 
         }

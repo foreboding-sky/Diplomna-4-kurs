@@ -9,8 +9,8 @@ namespace WpfApp1
 {
     class Purchase_ViewModel : Base_ViewModel
     {
-        private Purchase_ViewModel selectedPurchaseItem;
-        public Purchase_ViewModel SelectedPurchaseItem
+        private Purchase_Model selectedPurchaseItem;
+        public Purchase_Model SelectedPurchaseItem
         {
             get
             {
@@ -19,6 +19,25 @@ namespace WpfApp1
             set
             {
                 selectedPurchaseItem = value;
+                OnPropertyChanged("SelectedPurchaseItem");
+            }
+        }
+        private Customers_Model selectedCustomer;
+        public Customers_Model SelectedCustomer
+        {
+            get
+            {
+                return selectedCustomer;
+            }
+            set
+            {
+                if (selectedPurchaseItem != null)
+                    selectedCustomer = selectedPurchaseItem.Customer;
+                else
+                    selectedCustomer = value;
+                if (selectedPurchaseItem != null)
+                    selectedPurchaseItem.Customer = selectedCustomer;
+                OnPropertyChanged("SelectedCustomer");
                 OnPropertyChanged("SelectedPurchaseItem");
             }
         }
@@ -48,7 +67,7 @@ namespace WpfApp1
                 return new Command(obj =>
                 {
                     MainDataBase.GetInstance().AddPurchase();
-                    OnPropertyChanged("PriceList");
+                    OnPropertyChanged("Purchase");
                 });
             }
         }
@@ -58,12 +77,12 @@ namespace WpfApp1
             {
                 return new Command(obj =>
                 {
-                    PriceList_Model selectedItem = obj as PriceList_Model;
+                    Purchase_Model selectedItem = obj as Purchase_Model;
                     if (selectedItem != null)
                     {
                         MainDataBase.GetInstance().DeletePurchase(selectedItem.ID);
                     }
-                    OnPropertyChanged("PriceList");
+                    OnPropertyChanged("Purchase");
                 });
             }
         }
@@ -74,7 +93,7 @@ namespace WpfApp1
                 return new Command(obj =>
                 {
                     MainDataBase.GetInstance().SavePurchase(purchase.ToList());
-                    OnPropertyChanged("PriceList");
+                    OnPropertyChanged("Purchase");
                 });
             }
         }

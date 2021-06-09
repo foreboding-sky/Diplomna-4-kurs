@@ -37,9 +37,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock DataContext="{Binding Path=Customer}" Text="{Binding Path=Name}" Grid.Column="0" />
                         <TextBlock DataContext="{Binding Path=PurchaseItems.Item}" Text="{Binding Path=Name}" Grid.Column="1"/>
-                        <TextBlock DataContext="{Binding Path=PurchaseItems.Item}" Text="{Binding Path=Price}" Grid.Column="1"/>
-                        <TextBlock DataContext="{Binding Path=PurchaseItems}" Text="{Binding Path=Count}" Grid.Column="2"/>
-                        <TextBlock Text="{Binding Path=TotalPrice}" Grid.Column="2"/>
+                        <TextBlock DataContext="{Binding Path=PurchaseItems.Item}" Text="{Binding Path=Price}" Grid.Column="2"/>
+                        <TextBlock DataContext="{Binding Path=PurchaseItems}" Text="{Binding Path=Count}" Grid.Column="3"/>
+                        <TextBlock Text="{Binding Path=TotalPrice}" Grid.Column="4"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -53,15 +53,16 @@
                     <ColumnDefinition Width="21*"/>
                 </Grid.ColumnDefinitions>
                 <Button Margin="2,2,2,2" Command="{Binding AddCommand}">Додати</Button>
-                <Button Grid.Column="1" Margin="2,2,2,2" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedPriceListItem}" Grid.ColumnSpan="2">Видалити</Button>
+                <Button Grid.Column="1" Margin="2,2,2,2" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedPurchaseItem}" Grid.ColumnSpan="2">Видалити</Button>
             </Grid>
             <TextBlock TextAlignment="Center">Обраний елемент</TextBlock>
             <TextBlock Text="Назва товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Customers}" DisplayMemberPath="Name" SelectedValue="{Binding SelectedPurchaseItem.Customer.Name}" SelectedValuePath="Name"/>
+            <TextBox DataContext="{Binding SelectedPurchaseItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding PurchaseItems.Item.Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Ціна товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Item.Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPurchaseItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding PurchaseItems.Item.Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Кількість товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedPurchaseItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
         </StackPanel>
     </Grid>
 </Page>

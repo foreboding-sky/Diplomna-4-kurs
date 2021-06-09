@@ -27,13 +27,6 @@ namespace WpfApp1
         }
         public Purchase_Model()
         {
-            Customer = new Customers_Model();
-            PurchaseItems.Add(new PurchaseItem());
-        }
-        public Purchase_Model(string _name, double _price, int _count)
-        {
-            Customer = new Customers_Model();
-            PurchaseItems.Add(new PurchaseItem(_name, _price, _count));
         }
     }
 
@@ -42,16 +35,16 @@ namespace WpfApp1
         public int ID { get; set; }
         public int PuchaseID { get; set; }
         public Purchase_Model Purchase { get; set; }
-        public Item_Model Item { get; set; }
+        public PriceList_Model Item { get; set; }
         public int Count { get; set; }
         public PurchaseItem()
         {
-            Item = new Item_Model();
+            Item = new PriceList_Model();
             Count = 0;
         }
         public PurchaseItem(string _name, double _price, int _count)
         {
-            Item = new Item_Model(_name, _price);
+            Item = new PriceList_Model(_name, _price);
             Count = _count;
         }
     }
