@@ -13,8 +13,8 @@ namespace WpfApp1
         public string Name { get; set; }
         public double Price { get; set; }
         public int Count { get; set; }
-        public int PurchaseItemID { get; set; }
-        public PurchaseItem PurchaseItem { get; set; }
+        //public int PurchaseItemID { get; set; }
+        public List<PurchaseItem> PurchaseItems { get; set; }
         public PriceList_Model()
         {
             Name = "";

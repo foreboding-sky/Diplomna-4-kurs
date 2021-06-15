@@ -63,11 +63,11 @@ namespace WpfApp1
                     db.Customers_Items.AddRange(GetCustomersItems());
                     db.SaveChanges();
                 }
-                if(!db.Purchase_Items.Any())
-                {
-                    db.Purchase_Items.AddRange(GetPurchaseItems());
-                    db.SaveChanges();
-                }
+                //if(!db.Purchase_Items.Any())
+                //{
+                //    db.Purchase_Items.AddRange(GetPurchaseItems());
+                //    db.SaveChanges();
+                //}
             }
         }
         private List<PriceList_Model> GetPriceListItems()
@@ -89,12 +89,10 @@ namespace WpfApp1
             using (ApplicationContext db = new ApplicationContext())
             {
                 List<Purchase_Model> purchases = new List<Purchase_Model>();
-                purchases.Add(new Purchase_Model { Customer = db.Customers_Items.FirstOrDefault() });
+                var customer = db.Customers_Items.FirstOrDefault();
+                purchases.Add(new Purchase_Model { Customer =  customer });
+                return purchases;
             }
-            return new List<Purchase_Model>()
-            {
-                
-            };
         }
         #region PriceList
         public void AddPriceList()
@@ -213,6 +211,15 @@ namespace WpfApp1
                         //}
                     }
                 }
+                db.SaveChanges();
+            }
+        }
+        public void SavePurchaseItem(Purchase_Model model)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var dbModel = db.Purchase_Items.Where(p => p.ID == model.ID).Include(p =>p.Customer).Include(p=>p.PurchaseItems).SingleOrDefault();
+                dbModel.PurchaseItems.Add(new PurchaseItem { Purchase = model, Item = db.PriceList_Items.FirstOrDefault()});
                 db.SaveChanges();
             }
         }

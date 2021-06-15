@@ -33,7 +33,7 @@ namespace WpfApp1
     public class PurchaseItem
     {
         public int ID { get; set; }
-        public int PuchaseID { get; set; }
+        //public int PurchaseID { get; set; }
         public Purchase_Model Purchase { get; set; }
         public PriceList_Model Item { get; set; }
         public int Count { get; set; }
@@ -41,11 +41,6 @@ namespace WpfApp1
         {
             Item = new PriceList_Model();
             Count = 0;
-        }
-        public PurchaseItem(string _name, double _price, int _count)
-        {
-            Item = new PriceList_Model(_name, _price);
-            Count = _count;
         }
     }
 }

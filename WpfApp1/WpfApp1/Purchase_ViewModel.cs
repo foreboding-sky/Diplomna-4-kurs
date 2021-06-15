@@ -23,6 +23,19 @@ namespace WpfApp1
                 OnPropertyChanged("SelectedPurchaseItem");
             }
         }
+        private PurchaseItem selectedItem;
+        public PurchaseItem SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged("SelectedPurchaseItem");
+            }
+        }
         public ObservableCollection<Customers_Model> Customers
         {
             get
@@ -37,6 +50,15 @@ namespace WpfApp1
             {
                 purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List);
                 return purchase;
+            }
+        }
+        ObservableCollection<PriceList_Model> purchaseItems = new ObservableCollection<PriceList_Model>();
+        public ObservableCollection<PriceList_Model> PurchaseItems
+        {
+            get
+            {
+                purchaseItems = new ObservableCollection<PriceList_Model>(MainDataBase.GetInstance().PriceList_List);
+                return purchaseItems;
             }
         }
         public Purchase_ViewModel()
@@ -79,5 +101,21 @@ namespace WpfApp1
                 });
             }
         }
+        public Command AddItem
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+                    if(selectedPurchaseItem!=null)
+                    {
+                        selectedPurchaseItem.PurchaseItems.Add(new PurchaseItem());
+                        MainDataBase.GetInstance().SavePurchaseItem(selectedPurchaseItem);
+                    }
+                    OnPropertyChanged("Purchase");
+                });
+            }
+        }
+
     }
 }

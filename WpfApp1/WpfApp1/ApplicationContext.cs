@@ -27,9 +27,8 @@ namespace WpfApp1
             base.OnModelCreating(mb);
 
             mb.Entity<Customers_Model>().HasMany(c => c.Orders).WithOne(p => p.Customer).OnDelete(DeleteBehavior.Cascade);
-            mb.Entity<PurchaseItem>().HasOne(p => p.Item).WithOne(p => p.PurchaseItem).HasForeignKey<PurchaseItem>(p => p.PuchaseID);
+            mb.Entity<PurchaseItem>().HasOne(p => p.Item).WithMany(p => p.PurchaseItems); //HasForeignKey<PurchaseItem>(p => p.PurchaseID);
             mb.Entity<PurchaseItem>().HasOne(p => p.Purchase).WithMany(p => p.PurchaseItems);
-
         }
     }
 }
