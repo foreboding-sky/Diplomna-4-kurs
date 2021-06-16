@@ -20,6 +20,7 @@ namespace WpfApp1
             Name = "";
             Price = 0;
             Count = 0;
+            PurchaseItems = new List<PurchaseItem>();
         }
         public PriceList_Model(string _name, double _price)
         {
