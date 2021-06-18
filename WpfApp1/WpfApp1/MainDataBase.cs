@@ -182,21 +182,32 @@ namespace WpfApp1
             {
                 foreach (var model in purchaseModels)
                 {
-                    var dbModel = db.Purchase_Items.Where(p => p.ID == model.ID).Include(p => p.Customer).SingleOrDefault();
-                    dbModel.Customer = model.Customer;
-                    foreach(var purchaseItem in model.PurchaseItems)
+                    //var dbModel = db.Purchase_Items.Where(p => p.ID == model.ID).Include(p => p.Customer).SingleOrDefault();
+                    //dbModel.Customer = model.Customer;
+                    //foreach(var purchaseItem in model.PurchaseItems)
+                    //{
+                    //    var dbPurchaseItem = db.PurchaseItem_Items.Where(p => p.ID == purchaseItem.ID).Include(p => p.Item).SingleOrDefault();
+                    //    if (dbPurchaseItem != null)
+                    //    {
+                    //        dbPurchaseItem = purchaseItem;
+                    //    }
+                    //    else
+                    //    {
+                    //        dbPurchaseItem = new PurchaseItem();
+                    //        dbPurchaseItem = purchaseItem;
+                    //    }
+                    //}
+
+                    if (model.Customer != null)
                     {
-                        var dbPurchaseItem = db.PurchaseItem_Items.Where(p => p.ID == purchaseItem.ID).Include(p => p.Item).SingleOrDefault();
-                        if (dbPurchaseItem != null)
+                        var customer = db.Customers_Items.Find(model.Customer.ID);
+                        if (customer.Orders == null)
                         {
-                            dbPurchaseItem = purchaseItem;
+                            customer.Orders = new List<Purchase_Model>();
                         }
-                        else
-                        {
-                            dbPurchaseItem = new PurchaseItem();
-                            dbPurchaseItem = purchaseItem;
-                        }
+                        customer.Orders.Add(model);
                     }
+                    
                 }
                 db.SaveChanges();
             }

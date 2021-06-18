@@ -20,6 +20,7 @@ namespace WpfApp1
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Filename='./DiplomnaDataBase.db'");
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
