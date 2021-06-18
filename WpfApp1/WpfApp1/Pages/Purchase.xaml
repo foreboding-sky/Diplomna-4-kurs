@@ -97,7 +97,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ListView ItemsSource="{Binding SelectedPurchaseItem, UpdateSourceTrigger=PropertyChanged}">
+            <ListView ItemsSource="{Binding SelectedPurchaseItem.PurchaseItems, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -106,8 +106,10 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Товар:" Grid.Column="0"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding PurchaseItems}" SelectedItem="{Binding SelectedItem}">
+                                <TextBlock Text="Товар: " Grid.Column="0"/>
+                                <ComboBox Margin="5,0,0,0" Grid.Column="1" 
+                                          ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.Products}" 
+                                          SelectedItem="{Binding Item}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Name}" />

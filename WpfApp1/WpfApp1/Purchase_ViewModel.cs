@@ -67,13 +67,13 @@ namespace WpfApp1
                 return purchase;
             }
         }
-        ObservableCollection<PriceList_Model> purchaseItems = new ObservableCollection<PriceList_Model>();
-        public ObservableCollection<PriceList_Model> PurchaseItems
+        ObservableCollection<PriceList_Model> products = new ObservableCollection<PriceList_Model>();
+        public ObservableCollection<PriceList_Model> Products
         {
             get
             {
-                purchaseItems = new ObservableCollection<PriceList_Model>(MainDataBase.GetInstance().PriceList_List);
-                return purchaseItems;
+                products = new ObservableCollection<PriceList_Model>(MainDataBase.GetInstance().PriceList_List);
+                return products;
             }
         }
         public Purchase_ViewModel()
