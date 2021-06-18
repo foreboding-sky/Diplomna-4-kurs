@@ -18,10 +18,10 @@ namespace WpfApp1
             get
             {
                 double totalPrice = 0;
-                foreach (var item in PurchaseItems)
-                {
-                    totalPrice += item.Item.Price * item.Count;
-                }
+                //foreach (var item in PurchaseItems)
+                //{
+                //    totalPrice += item.Item.Price * item.Count;
+                //}
                 return totalPrice;
             }
         }

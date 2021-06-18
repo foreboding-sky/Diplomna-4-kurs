@@ -65,7 +65,6 @@
                                             <ColumnDefinition Width="20*"/>
                                             <ColumnDefinition Width="20*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="Test" Grid.Column="0"/>
                                         <TextBlock DataContext="{Binding Item}" Text="{Binding Name}" Grid.Column="0"/>
                                         <TextBlock DataContext="{Binding Item}" Text="{Binding Price}" Grid.Column="1"/>
                                         <TextBlock Text="{Binding Path=Count}" Grid.Column="2"/>

@@ -35,6 +35,7 @@ namespace WpfApp1
                 selectedPurchaseItem = value;
                 OnPropertyChanged("Customers");
                 OnPropertyChanged("SelectedPurchaseItem");
+                OnPropertyChanged("ItemsCount");
             }
         }
         private PurchaseItem selectedItem;
