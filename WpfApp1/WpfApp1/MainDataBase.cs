@@ -35,7 +35,7 @@ namespace WpfApp1
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    return db.Customers_Items.ToList();
+                    return db.Customers_Items.Include(c => c.Orders).ToList();
                 }
             }
         }
@@ -180,6 +180,8 @@ namespace WpfApp1
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+                //db.Purchase_Items.RemoveRange(db.Purchase_Items);
+                //db.SaveChanges();
                 foreach (var model in purchaseModels)
                 {
                     //var dbModel = db.Purchase_Items.Where(p => p.ID == model.ID).Include(p => p.Customer).SingleOrDefault();
@@ -200,12 +202,32 @@ namespace WpfApp1
 
                     if (model.Customer != null)
                     {
-                        var customer = db.Customers_Items.Include(p => p.Orders).FirstOrDefault(p => p.ID == model.Customer.ID);
+                        var customer = db.Customers_Items.Include(p => p.Orders).First(p => p.ID == model.Customer.ID);
                         if (customer.Orders == null)
                         {
                             customer.Orders = new List<Purchase_Model>();
                         }
-                        customer.Orders.Add(model);
+                        if (!customer.Orders.Any(o => o.ID == model.ID))
+                        {
+                            var customersWithThisOrder = this.Customers_List.Where(c => c.Orders.Any(o => o.ID == model.ID)).ToList();
+                            if (customersWithThisOrder.Count > 0)
+                            {
+                                var test = db.Purchase_Items.Include(o => o.Customer).First(o => o.ID == model.ID);
+                                customersWithThisOrder.First().Orders.Remove(test);
+
+                                customer.Orders.Add(test);
+                                //test.Customer = customer;
+
+                                db.SaveChanges();
+
+                            }
+                            else
+                            {
+                                customer.Orders.Add(model);
+
+                            }
+                        }
+                        
                     }
                     
                 }
