@@ -9,6 +9,20 @@ namespace WpfApp1
 {
     class Purchase_ViewModel : Base_ViewModel
     {
+        public int ItemsCount
+        {
+            get
+            {
+                var item = selectedPurchaseItem;
+                if (item != null)
+                    return item.PurchaseItems.Count();
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
         private Purchase_Model selectedPurchaseItem;
         public Purchase_Model SelectedPurchaseItem
         {

@@ -196,19 +196,6 @@ namespace WpfApp1
                             dbPurchaseItem = new PurchaseItem();
                             dbPurchaseItem = purchaseItem;
                         }
-                        //var dbItem = db.Items.Where(p => p.ID == purchaseItem.Item.ID).FirstOrDefault();
-                        //if (dbItem != null)
-                        //{
-                        //    dbItem.Name = purchaseItem.Item.Name;
-                        //    dbItem.Price = purchaseItem.Item.Price;
-                        //}
-                        //else
-                        //{
-                        //    dbItem = new Item_Model();
-                        //    dbItem.Name = purchaseItem.Item.Name;
-                        //    dbItem.Price = purchaseItem.Item.Price;
-                        //    db.Items.Add(dbItem);
-                        //}
                     }
                 }
                 db.SaveChanges();

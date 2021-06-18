@@ -44,7 +44,7 @@
             <TextBlock Text="Емайл" Margin="5,0,5,5"/>
             <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Адреса" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
         </StackPanel>
     </Grid>
 </Page>

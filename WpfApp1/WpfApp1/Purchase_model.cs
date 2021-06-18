@@ -39,7 +39,7 @@ namespace WpfApp1
         public int Count { get; set; }
         public PurchaseItem()
         {
-            Item = new PriceList_Model();
+            //Item = new PriceList_Model();
             Count = 0;
         }
     }

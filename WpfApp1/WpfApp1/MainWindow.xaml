@@ -16,6 +16,6 @@
             <Button Height="30" Command="{Binding ShowCustomers}">Замовники</Button>
             <Button Height="30" Command="{Binding ShowPurchases}">Замовлення</Button>
         </StackPanel>
-        <Frame x:Name="MainFrame" Grid.Column="1" Content="{Binding CurrentPage}"/>
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
     </Grid>
 </Window>
