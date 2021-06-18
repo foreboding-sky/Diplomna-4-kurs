@@ -200,7 +200,7 @@ namespace WpfApp1
 
                     if (model.Customer != null)
                     {
-                        var customer = db.Customers_Items.Find(model.Customer.ID);
+                        var customer = db.Customers_Items.Include(p => p.Orders).FirstOrDefault(p => p.ID == model.Customer.ID);
                         if (customer.Orders == null)
                         {
                             customer.Orders = new List<Purchase_Model>();
