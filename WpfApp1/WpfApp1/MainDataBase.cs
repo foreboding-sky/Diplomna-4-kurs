@@ -180,25 +180,16 @@ namespace WpfApp1
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                //db.Purchase_Items.RemoveRange(db.Purchase_Items);
-                //db.SaveChanges();
+                db.PurchaseItem_Items.RemoveRange(db.PurchaseItem_Items);
+                db.SaveChanges();
                 foreach (var model in purchaseModels)
                 {
-                    //var dbModel = db.Purchase_Items.Where(p => p.ID == model.ID).Include(p => p.Customer).SingleOrDefault();
-                    //dbModel.Customer = model.Customer;
-                    //foreach(var purchaseItem in model.PurchaseItems)
-                    //{
-                    //    var dbPurchaseItem = db.PurchaseItem_Items.Where(p => p.ID == purchaseItem.ID).Include(p => p.Item).SingleOrDefault();
-                    //    if (dbPurchaseItem != null)
-                    //    {
-                    //        dbPurchaseItem = purchaseItem;
-                    //    }
-                    //    else
-                    //    {
-                    //        dbPurchaseItem = new PurchaseItem();
-                    //        dbPurchaseItem = purchaseItem;
-                    //    }
-                    //}
+                    foreach (var pi in model.PurchaseItems)
+                    {
+                        var itemToAdd = db.PriceList_Items.Find(pi.Item.ID);
+                        var purchaseToAdd = db.Purchase_Items.Find(model.ID);
+                        db.PurchaseItem_Items.Add(new PurchaseItem() { Item = itemToAdd, Purchase = purchaseToAdd, Count = pi.Count });
+                    }
 
                     if (model.Customer != null)
                     {
@@ -214,26 +205,31 @@ namespace WpfApp1
                             {
                                 var test = db.Purchase_Items.Include(o => o.Customer).First(o => o.ID == model.ID);
                                 customersWithThisOrder.First().Orders.Remove(test);
-
                                 customer.Orders.Add(test);
-                                //test.Customer = customer;
-
                                 db.SaveChanges();
-
                             }
                             else
                             {
                                 customer.Orders.Add(model);
-
                             }
-                        }
-                        
+                        }   
                     }
                     
                 }
                 db.SaveChanges();
+                GC.Collect();
             }
         }
+
+        public void RemovePurchaseItem(PurchaseItem item)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.PurchaseItem_Items.Remove(db.PurchaseItem_Items.Find(item.ID));
+                db.SaveChanges();
+            }
+        }
+
         public void SavePurchaseItem(Purchase_Model model)
         {
             using (ApplicationContext db = new ApplicationContext())

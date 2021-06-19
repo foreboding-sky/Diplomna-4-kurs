@@ -127,7 +127,10 @@ namespace WpfApp1
                         selectedPurchaseItem.PurchaseItems.Add(new PurchaseItem());
                         MainDataBase.GetInstance().SavePurchaseItem(selectedPurchaseItem);
                     }
+                    var sas = purchase.IndexOf(selectedPurchaseItem);
                     OnPropertyChanged("Purchase");
+                    selectedPurchaseItem = purchase[sas];
+                    OnPropertyChanged("SelectedPurchaseItem");
                 });
             }
         }
