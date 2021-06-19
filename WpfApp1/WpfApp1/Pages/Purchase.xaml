@@ -120,7 +120,7 @@
                             </ComboBox>
                             <TextBlock Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
                             <TextBox Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
-                            <Button VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="4">Видалити</Button>
+                            <Button VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="4" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.RemovePurchaseItem}" CommandParameter="{Binding ID}">Видалити</Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
