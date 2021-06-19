@@ -97,10 +97,10 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ListView ItemsSource="{Binding SelectedPurchaseItem.PurchaseItems, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch">
+            <ListView ItemsSource="{Binding SelectedPurchaseItem.PurchaseItems, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" Margin="5,5,5,5">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5,0,5,5">
+                        <Grid Margin="5,0,5,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
@@ -108,8 +108,8 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Товар: " Margin="5" Grid.Column="0"/>
-                            <ComboBox Margin="5" Grid.Column="1" 
+                            <TextBlock Text="Товар: " Margin="0, 0, 5, 0" VerticalAlignment="Center" Grid.Column="0"/>
+                            <ComboBox     Margin="5" Grid.Column="1" VerticalAlignment="Center"
                                           ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.Products}" 
                                           SelectedItem="{Binding Item}">
                                 <ComboBox.ItemTemplate>
@@ -118,9 +118,9 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBlock Text="Кількість: " Margin="5" Grid.Column="2"/>
-                            <TextBox Text="{Binding Count}" Margin="5" Grid.Column="3"/>
-                            <Button Margin="5" Grid.Column="4">Видалити</Button>
+                            <TextBlock Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
+                            <TextBox Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
+                            <Button VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="4">Видалити</Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
