@@ -135,5 +135,28 @@ namespace WpfApp1
             }
         }
 
+        public Command RemovePurchaseItem
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+                    int id = 0;
+                    if (int.TryParse(obj.ToString(), out id))
+                    {
+                        var pi = selectedPurchaseItem.PurchaseItems.First(pi => pi.ID == id);
+                        selectedPurchaseItem.PurchaseItems.Remove(pi);
+
+                        MainDataBase.GetInstance().RemovePurchaseItem(pi);
+
+                        var sas = purchase.IndexOf(selectedPurchaseItem);
+                        OnPropertyChanged("Purchase");
+                        selectedPurchaseItem = purchase[sas];
+                        OnPropertyChanged("SelectedPurchaseItem");
+                    }
+                });
+            }
+        }
+
     }
 }
