@@ -9,17 +9,17 @@ namespace WpfApp1
 {
     class Supplier_ViewModel : Base_ViewModel
     {
-        private Supplier_Model selectedCustomersItem;
-        public Supplier_Model SelectedCustomersItem
+        private Supplier_Model selectedSuppliersItem;
+        public Supplier_Model SelectedSuppliersItem
         {
             get
             {
-                return selectedCustomersItem;
+                return selectedSuppliersItem;
             }
             set
             {
-                selectedCustomersItem = value;
-                OnPropertyChanged("SelectedCustomersItem");
+                selectedSuppliersItem = value;
+                OnPropertyChanged("SelectedSuppliersItem");
             }
         }
 

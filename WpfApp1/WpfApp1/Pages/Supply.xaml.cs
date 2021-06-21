@@ -23,6 +23,7 @@ namespace WpfApp1.Pages
         public Supply()
         {
             InitializeComponent();
+            this.DataContext = new Supply_ViewModel();
         }
     }
 }

@@ -39,20 +39,6 @@ namespace WpfApp1
                 OnPropertyChanged("ItemsCount");
             }
         }
-
-        private PurchaseItem selectedItem;
-        public PurchaseItem SelectedItem
-        {
-            get
-            {
-                return selectedItem;
-            }
-            set
-            {
-                selectedItem = value;
-                OnPropertyChanged("SelectedPurchaseItem");
-            }
-        }
         public ObservableCollection<Customers_Model> Customers
         {
             get
@@ -72,6 +58,7 @@ namespace WpfApp1
                 return new Command(obj =>
                 {
                     propName = obj.ToString();
+                    isDescending = false;
                     OnPropertyChanged("Purchase");
                 });
             }

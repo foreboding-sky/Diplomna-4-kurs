@@ -86,7 +86,7 @@ namespace WpfApp1
                 return showSupplies ??
                   (showSupplies = new RelayCommand(obj =>
                   {
-                      CurrentPage = new Pages.Suppliers();
+                      CurrentPage = new Pages.Supply();
                   }));
             }
         }

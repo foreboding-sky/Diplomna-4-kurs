@@ -49,6 +49,16 @@ namespace WpfApp1
                 }
             }
         }
+        public List<Supply_Model> Supply_List
+        {
+            get
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    return db.Supply_Items.Include(p => p.Supplier).Include(p => p.SupplyItems).ThenInclude(p => p.Item).ToList();
+                }
+            }
+        }
         public List<Purchase_Model> Purchase_List
         {
             get
@@ -215,6 +225,8 @@ namespace WpfApp1
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+                //var purchase = db.Purchase_Items.FirstOrDefault(p => p.ID == id);
+                //db.PurchaseItem_Items.RemoveRange(purchase.PurchaseItems);
                 db.Purchase_Items.Remove(db.Purchase_Items.First(t => t.ID == id));
                 db.SaveChanges();
             }
@@ -257,7 +269,6 @@ namespace WpfApp1
                             }
                         }   
                     }
-                    
                 }
                 db.SaveChanges();
                 GC.Collect();
@@ -279,6 +290,86 @@ namespace WpfApp1
             {
                 var dbModel = db.Purchase_Items.Where(p => p.ID == model.ID).Include(p =>p.Customer).Include(p=>p.PurchaseItems).SingleOrDefault();
                 dbModel.PurchaseItems.Add(new PurchaseItem { Purchase = model, Item = db.PriceList_Items.FirstOrDefault()});
+                db.SaveChanges();
+            }
+        }
+        #endregion
+        #region Supply
+        public void AddSupply()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Supply_Items.Add(new Supply_Model());
+                db.SaveChanges();
+            }
+        }
+        public void DeleteSupply(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Supply_Items.Remove(db.Supply_Items.First(t => t.ID == id));
+                db.SaveChanges();
+            }
+        }
+        public void SaveSupply(List<Supply_Model> supplyModels)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.SupplyItem_Items.RemoveRange(db.SupplyItem_Items);
+                db.SaveChanges();
+                foreach (var model in supplyModels)
+                {
+                    foreach (var pi in model.SupplyItems)
+                    {
+                        var itemToAdd = db.PriceList_Items.Find(pi.Item.ID);
+                        var supplyToAdd = db.Supply_Items.Find(model.ID);
+                        db.SupplyItem_Items.Add(new SupplyItem() { Item = itemToAdd, Supply = supplyToAdd, Count = pi.Count });
+                    }
+
+                    if (model.Supplier != null)
+                    {
+                        var supplier = db.Suppliers_Items.Include(p => p.Supplies).First(p => p.ID == model.Supplier.ID);
+                        if (supplier.Supplies == null)
+                        {
+                            supplier.Supplies = new List<Supply_Model>();
+                        }
+                        if (!supplier.Supplies.Any(o => o.ID == model.ID))
+                        {
+                            var suppliersWithThisOrder = this.Suppliers_List.Where(c => c.Supplies.Any(o => o.ID == model.ID)).ToList();
+                            if (suppliersWithThisOrder.Count > 0)
+                            {
+                                var test = db.Supply_Items.Include(o => o.Supplier).First(o => o.ID == model.ID);
+                                suppliersWithThisOrder.First().Supplies.Remove(test);
+                                supplier.Supplies.Add(test);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                supplier.Supplies.Add(model);
+                            }
+                        }
+                    }
+                }
+                db.SaveChanges();
+                GC.Collect();
+            }
+        }
+
+        public void RemoveSupplyItem(SupplyItem item)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.SupplyItem_Items.Remove(db.SupplyItem_Items.Find(item.ID));
+                db.SaveChanges();
+            }
+        }
+
+        public void SaveSupplyItem(Supply_Model model)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var dbModel = db.Supply_Items.Where(p => p.ID == model.ID).Include(p => p.Supplier).Include(p => p.SupplyItems).SingleOrDefault();
+                dbModel.SupplyItems.Add(new SupplyItem { Supply = model, Item = db.PriceList_Items.FirstOrDefault() });
                 db.SaveChanges();
             }
         }
