@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1
 {
-    public class Customers_Model
+    public class Customers_Model : IComparable
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -28,6 +28,17 @@ namespace WpfApp1
             Tel = _tel;
             Email = _email;
             Address = _address;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            Customers_Model other = obj as Customers_Model;
+            if (other != null)
+                return this.Name.CompareTo(other.Name);
+            else
+                throw new ArgumentException("Object is not a Customers_Model");
         }
     }
 }

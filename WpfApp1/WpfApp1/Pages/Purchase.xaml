@@ -35,8 +35,8 @@
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Замовник" Grid.Column="0" Margin="5,0,0,0"/>
-                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
-                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                <Button Command="{Binding Sort}" CommandParameter="Customer" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}"  CommandParameter="Customer" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
             </Grid>
             
             <Grid  Grid.Column="2">
@@ -76,8 +76,8 @@
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Вартість" Grid.Column="0" Margin="5,0,0,0"/>
-                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
-                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                <Button Command="{Binding Sort}" CommandParameter="TotalPrice" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}" CommandParameter="TotalPrice" Grid.Column="2" Margin="6,3,-2,3" VerticalContentAlignment="Center" Width="20">▼</Button>
             </Grid>
         </Grid>
         <ListView Grid.Row="1" x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Purchase}" SelectedItem="{Binding Path=SelectedPurchaseItem}">
