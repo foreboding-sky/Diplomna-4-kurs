@@ -149,7 +149,7 @@ namespace WpfApp1
             {
                 return new Command(obj =>
                 {
-                    if(selectedPurchaseItem!=null)
+                    if (selectedPurchaseItem != null)
                     {
                         selectedPurchaseItem.PurchaseItems.Add(new PurchaseItem());
                         MainDataBase.GetInstance().SavePurchaseItem(selectedPurchaseItem);
@@ -184,7 +184,7 @@ namespace WpfApp1
                 });
             }
         }
-        
+
 
     }
 }
