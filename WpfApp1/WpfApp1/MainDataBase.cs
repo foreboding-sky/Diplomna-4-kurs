@@ -83,36 +83,42 @@ namespace WpfApp1
                     db.Customers_Items.AddRange(GetCustomersItems());
                     db.SaveChanges();
                 }
-                //if(!db.Purchase_Items.Any())
-                //{
-                //    db.Purchase_Items.AddRange(GetPurchaseItems());
-                //    db.SaveChanges();
-                //}
+                if (!db.Suppliers_Items.Any())
+                {
+                    db.Suppliers_Items.AddRange(GetSuppliersItems());
+                    db.SaveChanges();
+                }
             }
         }
         private List<PriceList_Model> GetPriceListItems()
         {
             return new List<PriceList_Model>()
             {
-                new PriceList_Model()
+                new PriceList_Model{Name = "Test1", Count = 2, Price = 10},
+                new PriceList_Model{Name = "Test2", Count = 5, Price = 20},
+                new PriceList_Model{Name = "Test3", Count = 7, Price = 15},
+                new PriceList_Model{Name = "Test4", Count = 1, Price = 5}
             };
         }
         private List<Customers_Model> GetCustomersItems()
         {
             return new List<Customers_Model>()
             {
-                new Customers_Model("Test cutomer", "380692281337", "test@gmail.com", "Test address")
+                new Customers_Model("Test cutomer", "380692281337", "test@gmail.com", "Test address"),
+                new Customers_Model("Test cutomer2", "380692281337", "test@gmail.com", "Test address"),
+                new Customers_Model("Test cutomer3", "380692281337", "test@gmail.com", "Test address"),
+                new Customers_Model("Test cutomer4", "380692281337", "test@gmail.com", "Test address")
             };
         }
-        private List<Purchase_Model> GetPurchaseItems()
+        private List<Supplier_Model> GetSuppliersItems()
         {
-            using (ApplicationContext db = new ApplicationContext())
+            return new List<Supplier_Model>()
             {
-                List<Purchase_Model> purchases = new List<Purchase_Model>();
-                var customer = db.Customers_Items.FirstOrDefault();
-                purchases.Add(new Purchase_Model { Customer =  customer });
-                return purchases;
-            }
+                new Supplier_Model("Test supplier", "380692281337", "test@gmail.com", "Test address"),
+                new Supplier_Model("Test supplier2", "380692281337", "test@gmail.com", "Test address"),
+                new Supplier_Model("Test supplier3", "380692281337", "test@gmail.com", "Test address"),
+                new Supplier_Model("Test supplier4", "380692281337", "test@gmail.com", "Test address")
+            };
         }
         #region PriceList
         public void AddPriceList()
