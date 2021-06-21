@@ -33,11 +33,11 @@ namespace WpfApp1
 
             mb.Entity<Customers_Model>().HasMany(c => c.Orders).WithOne(p => p.Customer).OnDelete(DeleteBehavior.Cascade);
             mb.Entity<PriceList_Model>().HasMany(p => p.PurchaseItems).WithOne(p => p.Item);
-            mb.Entity<PurchaseItem>().HasOne(p => p.Purchase).WithMany(p => p.PurchaseItems);
+            mb.Entity<PurchaseItem>().HasOne(p => p.Purchase).WithMany(p => p.PurchaseItems).OnDelete(DeleteBehavior.Cascade);
 
             mb.Entity<Supplier_Model>().HasMany(c => c.Supplies).WithOne(p => p.Supplier).OnDelete(DeleteBehavior.Cascade);
             mb.Entity<PriceList_Model>().HasMany(p => p.SupplyItems).WithOne(p => p.Item);
-            mb.Entity<SupplyItem>().HasOne(p => p.Supply).WithMany(p => p.SupplyItems);
+            mb.Entity<SupplyItem>().HasOne(p => p.Supply).WithMany(p => p.SupplyItems).OnDelete(DeleteBehavior.Cascade);
 
         }
     }
