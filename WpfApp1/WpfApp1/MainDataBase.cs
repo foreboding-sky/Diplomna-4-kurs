@@ -25,7 +25,7 @@ namespace WpfApp1
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    return db.PriceList_Items.ToList();
+                    return db.PriceList_Items.Include(pl => pl.SupplyItems).Include(pl => pl.PurchaseItems).ToList();
                 }
             }
         }
@@ -94,10 +94,10 @@ namespace WpfApp1
         {
             return new List<PriceList_Model>()
             {
-                new PriceList_Model{Name = "Test1", Count = 2, Price = 10},
-                new PriceList_Model{Name = "Test2", Count = 5, Price = 20},
-                new PriceList_Model{Name = "Test3", Count = 7, Price = 15},
-                new PriceList_Model{Name = "Test4", Count = 1, Price = 5}
+                new PriceList_Model{Name = "Test1", Price = 10},
+                new PriceList_Model{Name = "Test2", Price = 20},
+                new PriceList_Model{Name = "Test3", Price = 15},
+                new PriceList_Model{Name = "Test4", Price = 5}
             };
         }
         private List<Customers_Model> GetCustomersItems()
@@ -146,7 +146,6 @@ namespace WpfApp1
                     var dbModel = db.PriceList_Items.Where(p => p.ID == model.ID).SingleOrDefault();
                     dbModel.Name = model.Name;
                     dbModel.Price = model.Price;
-                    dbModel.Count = model.Count;
                 }
                 db.SaveChanges();
             }
@@ -250,6 +249,16 @@ namespace WpfApp1
                         var itemToAdd = db.PriceList_Items.Find(pi.Item.ID);
                         var purchaseToAdd = db.Purchase_Items.Find(model.ID);
                         db.PurchaseItem_Items.Add(new PurchaseItem() { Item = itemToAdd, Purchase = purchaseToAdd, Count = pi.Count });
+
+                        try
+                        {
+                            db.SaveChanges();
+
+                        }
+                        catch (Exception e)
+                        {
+                            var sas = e.Message;
+                        }
                     }
 
                     if (model.Customer != null)
@@ -276,7 +285,16 @@ namespace WpfApp1
                         }   
                     }
                 }
-                db.SaveChanges();
+
+                try
+                {
+                    db.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    var sas = e.Message;
+                }
                 GC.Collect();
             }
         }
