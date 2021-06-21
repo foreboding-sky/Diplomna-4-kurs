@@ -42,6 +42,7 @@ namespace WpfApp1
         public Supply_Model Supply { get; set; }
         public PriceList_Model Item { get; set; }
         public int Count { get; set; }
+        public double Price { get; set; }
         public SupplyItem()
         {
             //Item = new PriceList_Model();
