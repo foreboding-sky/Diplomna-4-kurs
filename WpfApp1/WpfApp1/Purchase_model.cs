@@ -10,7 +10,11 @@ namespace WpfApp1
     public class Purchase_Model
     {
         public int ID { get; set; }
-        public Customers_Model Customer { get; set; }
+        public Customers_Model Customer 
+        { 
+            get;
+            set;
+        }
         public List<PurchaseItem> PurchaseItems { get; set; } = new List<PurchaseItem>();
         [NotMapped]
         public double TotalPrice
