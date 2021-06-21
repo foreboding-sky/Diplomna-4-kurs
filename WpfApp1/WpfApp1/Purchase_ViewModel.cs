@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,21 +60,48 @@ namespace WpfApp1
             }
         }
 
-        private Func<Purchase_Model, object> selector = x => x.ID;
+        //private Func<Purchase_Model, object> selector = x => x.ID;
+        private string propName = "ID";
         private bool isDescending = false;
 
+        public Command Sort
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+                    propName = obj.ToString();
+                    OnPropertyChanged("Purchase");
+                });
+            }
+        }
+        public Command SortDescending
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+                    propName = obj.ToString();
+                    isDescending = true;
+                    OnPropertyChanged("Purchase");
+                });
+            }
+        }
+
+        PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Purchase_Model));
         ObservableCollection<Purchase_Model> purchase = new ObservableCollection<Purchase_Model>();
         public ObservableCollection<Purchase_Model> Purchase
         {
             get
             {
+                PropertyDescriptor prop = props.Find(propName, true);
                 if (isDescending)
                 {
-                    purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List.OrderByDescending(selector));
+                    purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List.OrderByDescending(x => prop.GetValue(x)));
                 }
                 else
                 {
-                    purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List.OrderBy(selector));
+                    purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List.OrderBy(x => prop.GetValue(x)));
                 }
                 return purchase;
             }
@@ -168,26 +196,7 @@ namespace WpfApp1
                 });
             }
         }
-        public Command Sort
-        {
-            get
-            {
-                return new Command(obj =>
-                {
-
-                });
-            }
-        }
-        public Command SortDescending
-        {
-            get
-            {
-                return new Command(obj =>
-                {
-
-                });
-            }
-        }
+        
 
     }
 }

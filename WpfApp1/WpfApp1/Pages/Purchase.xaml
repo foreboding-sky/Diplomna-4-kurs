@@ -36,8 +36,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Замовник" Grid.Column="0" Margin="5,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                    <Button Command="{Binding Sort}" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
-                    <Button Command="{Binding SortDescending}" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    <Button Command="{Binding Sort}" CommandParameter="Customer" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                    <Button Command="{Binding SortDescending}" CommandParameter="Customer" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
                 </StackPanel>
             </Grid>
            
@@ -54,8 +54,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Вартість" Grid.Column="0" Margin="5,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                    <Button Command="{Binding Sort}" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
-                    <Button Command="{Binding SortDescending}" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    <Button Command="{Binding Sort}" CommandParameter="TotalPrice" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                    <Button Command="{Binding SortDescending}" CommandParameter="TotalPrice" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
                 </StackPanel>
             </Grid>
         </Grid>
