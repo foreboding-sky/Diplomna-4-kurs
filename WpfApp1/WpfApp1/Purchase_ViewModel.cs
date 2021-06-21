@@ -58,12 +58,23 @@ namespace WpfApp1
                 return new ObservableCollection<Customers_Model>(MainDataBase.GetInstance().Customers_List);
             }
         }
+
+        private Func<Purchase_Model, object> selector = x => x.ID;
+        private bool isDescending = false;
+
         ObservableCollection<Purchase_Model> purchase = new ObservableCollection<Purchase_Model>();
         public ObservableCollection<Purchase_Model> Purchase
         {
             get
             {
-                purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List);
+                if (isDescending)
+                {
+                    purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List.OrderByDescending(selector));
+                }
+                else
+                {
+                    purchase = new ObservableCollection<Purchase_Model>(MainDataBase.GetInstance().Purchase_List.OrderBy(selector));
+                }
                 return purchase;
             }
         }
