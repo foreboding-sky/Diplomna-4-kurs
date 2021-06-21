@@ -81,8 +81,8 @@
                                             <ColumnDefinition Width="20*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock DataContext="{Binding Item}" Text="{Binding Name}" Grid.Column="0"/>
-                                        <TextBlock DataContext="{Binding Item}" Text="{Binding Price}" Grid.Column="1"/>
-                                        <TextBlock Text="{Binding Path=Count}" Grid.Column="2"/>
+                                        <TextBlock Text="{Binding Price}" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding Count}" Grid.Column="2"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -112,11 +112,17 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Кількість товарів: " Margin="5,0,5,0"/>
+                <TextBlock Text="{Binding ItemsCount}" Margin="0,0,5,0"/>
+            </StackPanel>
             <ListView ItemsSource="{Binding SelectedSupplyItem.SupplyItems, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" Margin="5,5,5,5">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5,0,5,0">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
@@ -135,13 +141,14 @@
                             </ComboBox>
                             <TextBlock Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
                             <TextBox Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
-                            <Button VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="4" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.RemoveSupplyItem}" CommandParameter="{Binding ID}">Видалити</Button>
+                            <TextBlock Text="Ціна: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="4"/>
+                            <TextBox Text="{Binding Price}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="5"/>
+                            <Button VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="6" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.RemoveSupplyItem}" CommandParameter="{Binding ID}">Видалити</Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <Button Command="{Binding AddItem}" Margin="5,0,5,5">Додати товар</Button>
-            <TextBlock Text="{Binding ItemsCount}" Margin="5,0,5,5"/>
             <!--<TextBlock Text="Кількість товару" Margin="5,0,5,5"/>
             <TextBox DataContext="{Binding SelectedPurchaseItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding PurchaseItems.Count, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>-->
         </StackPanel>

@@ -24,7 +24,7 @@ namespace WpfApp1
                     {
                         if (item.Item != null)
                         {
-                            totalPrice += item.Item.Price * item.Count;
+                            totalPrice += item.Price * item.Count;
                         }
                     }
                 }

@@ -222,7 +222,7 @@ namespace WpfApp1
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Purchase_Items.Add(new Purchase_Model());
+                db.Purchase_Items.Add(new Purchase_Model() { Customer = db.Customers_Items.FirstOrDefault()});
                 db.SaveChanges();
             }
         }
@@ -323,7 +323,7 @@ namespace WpfApp1
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Supply_Items.Add(new Supply_Model());
+                db.Supply_Items.Add(new Supply_Model() { Supplier = db.Suppliers_Items.FirstOrDefault()});
                 db.SaveChanges();
             }
         }
@@ -347,7 +347,7 @@ namespace WpfApp1
                     {
                         var itemToAdd = db.PriceList_Items.Find(pi.Item.ID);
                         var supplyToAdd = db.Supply_Items.Find(model.ID);
-                        db.SupplyItem_Items.Add(new SupplyItem() { Item = itemToAdd, Supply = supplyToAdd, Count = pi.Count });
+                        db.SupplyItem_Items.Add(new SupplyItem() { Item = itemToAdd, Supply = supplyToAdd, Count = pi.Count, Price = pi.Price});
                     }
 
                     if (model.Supplier != null)
