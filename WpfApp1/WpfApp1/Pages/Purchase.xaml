@@ -17,17 +17,6 @@
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--<DataGrid Grid.Column="0" 
-                  IsReadOnly="True" 
-                  ItemsSource="{Binding PriceList, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedPriceListItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва" Width="70*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Count}"/>
-                <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Price}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
@@ -37,12 +26,59 @@
                 <ColumnDefinition Width="8*"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="ID" Grid.Column="0" Margin="5,0,0,0"/>
-            <TextBlock Text="Замовник" Grid.Column="1" Margin="5,0,0,0"/>
-            <TextBlock Text="Товар" Grid.Column="2" Margin="5,0,0,0"/>
-            <TextBlock Text="Ціна" Grid.Column="3" Margin="5,0,0,0"/>
-            <TextBlock Text="Кількість" Grid.Column="4" Margin="5,0,0,0"/>
-            <TextBlock Text="Вартість" Grid.Column="5" Margin="5,0,0,0"/>
+            <TextBlock Text="ID" Margin="5,0,0,0" Grid.Column="0"/>
+            
+            <Grid  Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Замовник" Grid.Column="0" Margin="5,0,0,0"/>
+                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+            </Grid>
+            
+            <Grid  Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Товар" Grid.Column="0" Margin="5,0,0,0"/>
+                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button> </Grid>
+            
+            <Grid  Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Ціна" Grid.Column="0" Margin="5,0,0,0"/>
+                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button> </Grid>
+
+            <Grid  Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Кількість" Grid.Column="0" Margin="5,0,0,0"/>
+                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button> </Grid>
+
+            <Grid  Grid.Column="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Вартість" Grid.Column="0" Margin="5,0,0,0"/>
+                <Button Command="{Binding Sort}" Grid.Column="1" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                <Button Command="{Binding SortDescending}" Grid.Column="2" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+            </Grid>
         </Grid>
         <ListView Grid.Row="1" x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Purchase}" SelectedItem="{Binding Path=SelectedPurchaseItem}">
             <ListView.ItemTemplate>

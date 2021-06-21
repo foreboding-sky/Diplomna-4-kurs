@@ -157,6 +157,26 @@ namespace WpfApp1
                 });
             }
         }
+        public Command Sort
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+
+                });
+            }
+        }
+        public Command SortDescending
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+
+                });
+            }
+        }
 
     }
 }
