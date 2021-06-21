@@ -66,5 +66,29 @@ namespace WpfApp1
                   }));
             }
         }
+        private RelayCommand showSuppliers;
+        public RelayCommand ShowSuppliers
+        {
+            get
+            {
+                return showSuppliers ??
+                  (showSuppliers = new RelayCommand(obj =>
+                  {
+                      CurrentPage = new Pages.Suppliers();
+                  }));
+            }
+        }
+        private RelayCommand showSupplies;
+        public RelayCommand ShowSupplies
+        {
+            get
+            {
+                return showSupplies ??
+                  (showSupplies = new RelayCommand(obj =>
+                  {
+                      CurrentPage = new Pages.Suppliers();
+                  }));
+            }
+        }
     }
 }

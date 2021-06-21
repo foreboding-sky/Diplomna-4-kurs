@@ -15,12 +15,14 @@ namespace WpfApp1
         public int Count { get; set; }
         //public int PurchaseItemID { get; set; }
         public List<PurchaseItem> PurchaseItems { get; set; }
+        public List<SupplyItem> SupplyItems { get; set; }
         public PriceList_Model()
         {
             Name = "";
             Price = 0;
             Count = 0;
             PurchaseItems = new List<PurchaseItem>();
+            SupplyItems = new List<SupplyItem>();
         }
         public PriceList_Model(string _name, double _price)
         {

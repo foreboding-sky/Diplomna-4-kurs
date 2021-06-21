@@ -39,6 +39,16 @@ namespace WpfApp1
                 }
             }
         }
+        public List<Supplier_Model> Suppliers_List
+        {
+            get
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    return db.Suppliers_Items.Include(c => c.Supplies).ToList();
+                }
+            }
+        }
         public List<Purchase_Model> Purchase_List
         {
             get
@@ -150,6 +160,39 @@ namespace WpfApp1
                 foreach (var model in customers)
                 {
                     var item = db.Customers_Items.Find(model.ID);
+                    item.Name = model.Name;
+                    item.Tel = model.Tel;
+                    item.Email = model.Email;
+                    item.Address = model.Address;
+                }
+                db.SaveChanges();
+            }
+        }
+        #endregion
+        #region Suppliers
+        public void AddSuppliers()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Suppliers_Items.Add(new Supplier_Model());
+                db.SaveChanges();
+            }
+        }
+        public void DeleteSuppliers(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Suppliers_Items.Remove(db.Suppliers_Items.First(t => t.ID == id));
+                db.SaveChanges();
+            }
+        }
+        public void SaveSuppliers(List<Supplier_Model> suppliers)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                foreach (var model in suppliers)
+                {
+                    var item = db.Suppliers_Items.Find(model.ID);
                     item.Name = model.Name;
                     item.Tel = model.Tel;
                     item.Email = model.Email;
