@@ -122,7 +122,7 @@ namespace WpfApp1
             {
                 return new Command(obj =>
                 {
-                    Purchase_Model selectedItem = obj as Purchase_Model;
+                    Supply_Model selectedItem = obj as Supply_Model;
                     if (selectedItem != null)
                     {
                         MainDataBase.GetInstance().DeleteSupply(selectedItem.ID);
