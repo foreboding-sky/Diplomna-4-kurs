@@ -39,6 +39,7 @@ namespace WpfApp1
                 OnPropertyChanged("ItemsCount");
             }
         }
+
         private PurchaseItem selectedItem;
         public PurchaseItem SelectedItem
         {
