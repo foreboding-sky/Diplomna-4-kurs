@@ -47,7 +47,6 @@ namespace WpfApp1
             }
         }
 
-        //private Func<Purchase_Model, object> selector = x => x.ID;
         private string propName = "ID";
         private bool isDescending = false;
 

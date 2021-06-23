@@ -7,55 +7,131 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PriceList">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value ="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="75*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" 
-                  IsReadOnly="True" 
-                  ItemsSource="{Binding PriceList, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedPriceListItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва" Width="70*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Count}"/>
-                <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Price}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <!--<ListView x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=PriceList}" SelectedItem="{Binding Path=SelectedPriceListItem}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*" MinWidth="100"/>
+                <ColumnDefinition Width="20*" MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="0">
+                <TextBlock Text="ID" Margin="0,0,0,0"/>
+            </Border>
+            
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="40*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Назва товару" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Name" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Name" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="40*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Ціна" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Price" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Price" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Gray" BorderThickness="1 1 1 1" Grid.Column="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="40*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Кількість" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Count" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Count" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <ListView Background="LightGray" x:Name="ItemsListView" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding PriceList}" SelectedItem="{Binding SelectedPriceListItem}" Margin="0,0,0,5">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Padding" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True" >
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="-2" Background="White">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="60*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Name}" Grid.Column="0" />
-                        <TextBlock Text="{Binding Path=Price}" Grid.Column="1"/>
-                        <TextBlock Text="{Binding Path=Count}" Grid.Column="2"/>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="0" >
+                            <TextBlock FontSize="14" Text="{Binding ID}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="1" >
+                            <TextBlock FontSize="14" Text="{Binding Name}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="2" >
+                            <TextBlock FontSize="14" Text="{Binding Price}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 1 1" Grid.Column="3" >
+                            <TextBlock FontSize="14" Text="{Binding Count}"/>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
-        <StackPanel Grid.Column="1" >
-            <Button Margin="2" Command="{Binding SaveCommand}">Зберегти</Button>
+        </ListView>
+        <StackPanel Grid.Column="1" Grid.Row="1" >
+            <Button Margin="5,2,5,2" Command="{Binding SaveCommand}">Зберегти</Button>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100*"/>
                     <ColumnDefinition Width="79*"/>
                     <ColumnDefinition Width="21*"/>
                 </Grid.ColumnDefinitions>
-                <Button Margin="2,2,2,2" Command="{Binding AddCommand}">Додати</Button>
-                <Button Grid.Column="1" Margin="2,2,2,2" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedPriceListItem}" Grid.ColumnSpan="2">Видалити</Button>
+                <Button Margin="5,2,2,2" Command="{Binding AddCommand}">Додати</Button>
+                <Button Grid.Column="1" Margin="2,2,5,2" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedPriceListItem}" Grid.ColumnSpan="2">Видалити</Button>
             </Grid>
             <TextBlock TextAlignment="Center">Обраний елемент</TextBlock>
             <TextBlock Text="Назва товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox FontSize="14" DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Ціна товару" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox FontSize="14" DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <!--<TextBlock Text="Кількість товару" Margin="5,0,5,5"/>
             <TextBox DataContext="{Binding SelectedPriceListItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>-->
         </StackPanel>
