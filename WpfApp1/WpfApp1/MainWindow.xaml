@@ -6,17 +6,22 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" MinWidth="800" MinHeight="600" WindowState="Maximized">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical">
-            <Button Height="30" Command="{Binding ShowPriceList}">Прайс лист</Button>
-            <Button Height="30" Command="{Binding ShowCustomers}">Замовники</Button>
-            <Button Height="30" Command="{Binding ShowPurchases}">Замовлення</Button>
-            <Button Height="30" Command="{Binding ShowSuppliers}">Постачальники</Button>
-            <Button Height="30" Command="{Binding ShowSupplies}">Поставки</Button>
+            <Button Margin="5,2,5,2" Height="30" Command="{Binding ShowPriceList}">Прайс лист</Button>
+            <Button Margin="5,2,5,2" Height="30" Command="{Binding ShowCustomers}">Замовники</Button>
+            <Button Margin="5,2,5,2" Height="30" Command="{Binding ShowPurchases}">Замовлення</Button>
+            <Button Margin="5,2,5,2" Height="30" Command="{Binding ShowSuppliers}">Постачальники</Button>
+            <Button Margin="5,2,5,2" Height="30" Command="{Binding ShowSupplies}">Поставки</Button>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
     </Grid>
