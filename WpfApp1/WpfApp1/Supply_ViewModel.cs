@@ -10,6 +10,8 @@ namespace WpfApp1
 {
     class Supply_ViewModel : Base_ViewModel
     {
+        private string propName = "ID";
+        private bool isDescending = false;
         public int ItemsCount
         {
             get
@@ -46,9 +48,6 @@ namespace WpfApp1
                 return new ObservableCollection<Supplier_Model>(MainDataBase.GetInstance().Suppliers_List);
             }
         }
-
-        private string propName = "ID";
-        private bool isDescending = false;
 
         public Command Sort
         {

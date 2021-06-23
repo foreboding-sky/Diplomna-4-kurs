@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1
 {
-    public class Supplier_Model
+    public class Supplier_Model : IComparable
     {
         public int ID { get; set; }
         public string Name { get; set; }

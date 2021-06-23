@@ -7,6 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Supply">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value ="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -19,75 +28,114 @@
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="16*" MinWidth="60"/>
-                <ColumnDefinition Width="16*" MinWidth="60"/>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="5*" MinWidth="20"/>
+                <ColumnDefinition Width="35*" MinWidth="150"/>
+                <ColumnDefinition Width="24*" MinWidth="85"/>
+                <ColumnDefinition Width="8*" MinWidth="60"/>
+                <ColumnDefinition Width="8*" MinWidth="60"/>
+                <ColumnDefinition Width="20*" MinWidth="95"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="ID" Margin="5,0,0,0" Grid.Column="0"/>
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="0">
+                <TextBlock Text="ID" Margin="5,0,0,0" Grid.Column="0"/>
+            </Border>
 
-            <Grid  Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80*"/>
-                    <ColumnDefinition Width="20*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Поставник" Grid.Column="0" Margin="5,0,0,0"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                    <Button Command="{Binding Sort}" CommandParameter="Supplier" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
-                    <Button Command="{Binding SortDescending}" CommandParameter="Supplier" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
-                </StackPanel>
-            </Grid>
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="40*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Замовник" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Supplier" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Supplier" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
-            <TextBlock Text="Товар" Grid.Column="2"/>
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="2">
+                <TextBlock Text="Товар"/>
+            </Border>
 
-            <TextBlock Text="Ціна" Grid.Column="3"/>
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="3">
+                <TextBlock Text="Ціна"/>
+            </Border>
 
-            <TextBlock Text="Кількість" Grid.Column="4" Margin="5,0,0,0"/>
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="4">
+                <TextBlock Text="Кількість" Grid.Column="4" Margin="5,0,0,0"/>
+            </Border>
 
-            <Grid  Grid.Column="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60*"/>
-                    <ColumnDefinition Width="40*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Вартість" Grid.Column="0" Margin="5,0,0,0"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                    <Button Command="{Binding Sort}" CommandParameter="TotalPrice" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
-                    <Button Command="{Binding SortDescending}" CommandParameter="TotalPrice" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▼</Button>
-                </StackPanel>
-            </Grid>
+            <Border BorderBrush="Gray" BorderThickness="1 1 1 1" Grid.Column="5">
+                <Grid  Grid.Column="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="40*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Вартість" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="TotalPrice" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="18">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="TotalPrice" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="18">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
         </Grid>
-        <ListView Grid.Row="1" x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Supply}" SelectedItem="{Binding Path=SelectedSupplyItem}">
+        <ListView Background="LightGray" Grid.Row="1" x:Name="ItemsListView" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Supply}" SelectedItem="{Binding Path=SelectedSupplyItem}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True" >
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="-2" Background="White">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"/>
-                            <ColumnDefinition Width="35*"/>
-                            <ColumnDefinition Width="40*"/>
-                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="5*" MinWidth="20"/>
+                            <ColumnDefinition Width="35*" MinWidth="150"/>
+                            <ColumnDefinition Width="40*" MinWidth="205"/>
+                            <ColumnDefinition Width="20*" MinWidth="95"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding ID}" Grid.Column="0"/>
-                        <TextBlock DataContext="{Binding Path=Supplier}" Text="{Binding Path=Name}" Grid.Column="1" />
-                        <ListView Grid.Column="2" BorderThickness="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=SupplyItems}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Background="Transparent">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="60*"/>
-                                            <ColumnDefinition Width="20*"/>
-                                            <ColumnDefinition Width="20*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock DataContext="{Binding Item}" Text="{Binding Name}" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding Price}" Grid.Column="1"/>
-                                        <TextBlock Text="{Binding Count}" Grid.Column="2"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        <TextBlock Text="{Binding Path=TotalPrice}" Grid.Column="3"/>
+                        
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="0">
+                            <TextBlock FontSize="14" Text="{Binding ID}" Grid.Column="0"/>
+                        </Border>
+
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="1">
+                            <TextBlock FontSize="14" DataContext="{Binding Path=Supplier}" Text="{Binding Path=Name}" Grid.Column="1" />
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="2">
+                            <ItemsControl BorderThickness="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=SupplyItems}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Transparent">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60*" MinWidth="85"/>
+                                                <ColumnDefinition Width="20*" MinWidth="60"/>
+                                                <ColumnDefinition Width="20*" MinWidth="60"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border BorderBrush="Black" BorderThickness="0 0 1 1" Grid.Column="0">
+                                                <TextBlock FontSize="14" DataContext="{Binding Item}" Text="{Binding Name}"/>
+                                            </Border>
+                                            <Border BorderBrush="Black" BorderThickness="0 0 1 1" Grid.Column="1">
+                                                <TextBlock FontSize="14" Text="{Binding Price}"/>
+                                            </Border>
+                                            <Border BorderBrush="Black" BorderThickness="0 0 0 1" Grid.Column="2">
+                                                <TextBlock FontSize="14" Text="{Binding Path=Count}"/>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+
+                        <Border BorderBrush="Black" BorderThickness="1 1 1 1" Grid.Column="3">
+                            <TextBlock FontSize="14" Text="{Binding Path=TotalPrice}"/>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -108,7 +156,7 @@
             <ComboBox Margin="5,5,5,5" ItemsSource="{Binding Suppliers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSupplyItem.Supplier}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock FontSize="14" Text="{Binding Name}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -129,21 +177,21 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Товар: " Margin="0, 0, 5, 0" VerticalAlignment="Center" Grid.Column="0"/>
+                            <TextBlock FontSize="14" Text="Товар: " Margin="0, 0, 5, 0" VerticalAlignment="Center" Grid.Column="0"/>
                             <ComboBox     Margin="5" Grid.Column="1" VerticalAlignment="Center"
                                           ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.Products}" 
                                           SelectedItem="{Binding Item}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock FontSize="14" Text="{Binding Name}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBlock Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
-                            <TextBox Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
-                            <TextBlock Text="Ціна: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="4"/>
-                            <TextBox Text="{Binding Price}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="5"/>
-                            <Button VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="6" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.RemoveSupplyItem}" CommandParameter="{Binding ID}">Видалити</Button>
+                            <TextBlock FontSize="14" Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
+                            <TextBox FontSize="14" Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
+                            <TextBlock FontSize="14" Text="Ціна: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="4"/>
+                            <TextBox FontSize="14" Text="{Binding Price}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="5"/>
+                            <Button FontSize="14" VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="6" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.RemoveSupplyItem}" CommandParameter="{Binding ID}">Видалити</Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

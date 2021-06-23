@@ -7,25 +7,134 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Customers">
-
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value ="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="75*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" 
-                  IsReadOnly="True" 
-                  ItemsSource="{Binding Customers, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedCustomersItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва" Width="70*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Tel}"/>
-                <DataGridTextColumn Header="К-сть" Width="15*" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="Ціна" Width="15*" Binding="{Binding Address}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Grid.Column="1" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" MinWidth="20"/>
+                <ColumnDefinition Width="60*" MinWidth="150"/>
+                <ColumnDefinition Width="20*" MinWidth="95"/>
+                <ColumnDefinition Width="20*" MinWidth="100"/>
+                <ColumnDefinition Width="20*" MinWidth="105"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="0">
+                <TextBlock Text="ID" Margin="0,0,0,0"/>
+            </Border>
+
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="40*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Назва замовника" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Name" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Name" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Телефон" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Tel" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Tel" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Gray" BorderThickness="1 1 1 1" Grid.Column="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Email" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Email" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Email" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Gray" BorderThickness="1 1 1 1" Grid.Column="4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Адреса" Grid.Column="0" Margin="5,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding Sort}" CommandParameter="Address" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
+                        <Button Command="{Binding SortDescending}" CommandParameter="Address" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <ListView Background="LightGray" x:Name="ItemsListView" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomersItem}" Margin="0,0,0,5">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Padding" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True" >
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="-2" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" MinWidth="20"/>
+                            <ColumnDefinition Width="60*" MinWidth="150"/>
+                            <ColumnDefinition Width="20*" MinWidth="95"/>
+                            <ColumnDefinition Width="20*" MinWidth="100"/>
+                            <ColumnDefinition Width="20*" MinWidth="105"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="0" >
+                            <TextBlock FontSize="14" Text="{Binding ID}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="1" >
+                            <TextBlock FontSize="14" Text="{Binding Name}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="2" >
+                            <TextBlock FontSize="14" Text="{Binding Tel}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 1" Grid.Column="3" >
+                            <TextBlock FontSize="14" Text="{Binding Email}"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 1 1" Grid.Column="4" >
+                            <TextBlock FontSize="14" Text="{Binding Address}"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="1" Grid.Row="1">
             <Button Margin="2" Command="{Binding SaveCommand}">Зберегти</Button>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -38,13 +147,13 @@
             </Grid>
             <TextBlock TextAlignment="Center">Обраний елемент</TextBlock>
             <TextBlock Text="Назва замовника" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox FontSize="14" DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Моб. телефон" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Tel, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox FontSize="14" DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Tel, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Емайл" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox FontSize="14" DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
             <TextBlock Text="Адреса" Margin="5,0,5,5"/>
-            <TextBox DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
+            <TextBox FontSize="14" DataContext="{Binding SelectedCustomersItem, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,5"/>
         </StackPanel>
     </Grid>
 </Page>

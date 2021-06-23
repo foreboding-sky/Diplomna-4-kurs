@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,9 @@ namespace WpfApp1
 {
     class Supplier_ViewModel : Base_ViewModel
     {
+        private string propName = "ID";
+        private bool isDescending = false;
+
         private Supplier_Model selectedSuppliersItem;
         public Supplier_Model SelectedSuppliersItem
         {
@@ -23,17 +27,50 @@ namespace WpfApp1
             }
         }
 
+        PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Supplier_Model));
         ObservableCollection<Supplier_Model> suppliers = new ObservableCollection<Supplier_Model>();
         public ObservableCollection<Supplier_Model> Suppliers
         {
             get
             {
-                suppliers = new ObservableCollection<Supplier_Model>(MainDataBase.GetInstance().Suppliers_List);
+                PropertyDescriptor prop = props.Find(propName, true);
+                if (isDescending)
+                {
+                    suppliers = new ObservableCollection<Supplier_Model>(MainDataBase.GetInstance().Suppliers_List.OrderByDescending(x => prop.GetValue(x)));
+                }
+                else
+                {
+                    suppliers = new ObservableCollection<Supplier_Model>(MainDataBase.GetInstance().Suppliers_List.OrderBy(x => prop.GetValue(x)));
+                }
                 return suppliers;
             }
         }
         public Supplier_ViewModel()
         {
+        }
+        public Command Sort
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+                    propName = obj.ToString();
+                    isDescending = false;
+                    OnPropertyChanged("Suppliers");
+                });
+            }
+        }
+        public Command SortDescending
+        {
+            get
+            {
+                return new Command(obj =>
+                {
+                    propName = obj.ToString();
+                    isDescending = true;
+                    OnPropertyChanged("Suppliers");
+                });
+            }
         }
         public Command AddCommand
         {
