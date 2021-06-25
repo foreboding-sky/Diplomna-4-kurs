@@ -59,7 +59,7 @@
             </Border>
 
             <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="3">
-                <TextBlock Text="Ціна"/>
+                <TextBlock Text="Ціна, $"/>
             </Border>
 
             <Border BorderBrush="Gray" BorderThickness="1 1 0 1" Grid.Column="4">
@@ -187,10 +187,10 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBlock FontSize="14" Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
-                            <TextBox FontSize="14" Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
-                            <TextBlock FontSize="14" Text="Ціна: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="4"/>
-                            <TextBox FontSize="14" Text="{Binding Price}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="5"/>
+                            <TextBlock FontSize="14" Text="Ціна: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="2"/>
+                            <TextBox FontSize="14" Text="{Binding Price}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="3"/>
+                            <TextBlock FontSize="14" Text="Кількість: " VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="4"/>
+                            <TextBox FontSize="14" Text="{Binding Count}" VerticalAlignment="Center" Margin="5, 0, 5, 0" Grid.Column="5"/>
                             <Button FontSize="14" VerticalAlignment="Center" Margin="5, 0, 0, 0" Grid.Column="6" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.RemoveSupplyItem}" CommandParameter="{Binding ID}">Видалити</Button>
                         </Grid>
                     </DataTemplate>

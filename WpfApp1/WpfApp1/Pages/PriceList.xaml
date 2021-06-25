@@ -58,7 +58,7 @@
                         <ColumnDefinition Width="60*"/>
                         <ColumnDefinition Width="40*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Ціна" Grid.Column="0" Margin="5,0,0,0"/>
+                    <TextBlock Text="Ціна, $" Grid.Column="0" Margin="5,0,0,0"/>
                     <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
                         <Button Command="{Binding Sort}" CommandParameter="Price" FontSize="10" Margin="0,3,0,3" VerticalContentAlignment="Center" Width="20">▲</Button>
                         <Button Command="{Binding SortDescending}" CommandParameter="Price" FontSize="10" Margin="0,3,3,3" VerticalContentAlignment="Center" Width="20">▼</Button>

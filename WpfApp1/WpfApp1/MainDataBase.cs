@@ -94,30 +94,47 @@ namespace WpfApp1
         {
             return new List<PriceList_Model>()
             {
-                new PriceList_Model{Name = "Test1", Price = 10},
-                new PriceList_Model{Name = "Test2", Price = 20},
-                new PriceList_Model{Name = "Test3", Price = 15},
-                new PriceList_Model{Name = "Test4", Price = 5}
+                new PriceList_Model{Name = "Клейонка Lase", Price = 42},
+                new PriceList_Model{Name = "Клейонка Lux", Price = 50},
+                new PriceList_Model{Name = "Плівка чорна 200мкм 50м", Price = 22},
+                new PriceList_Model{Name = "Плівка чорна 150мкм", Price = 25},
+                new PriceList_Model{Name = "Плівка чорна 120мкм", Price = 23},
+                new PriceList_Model{Name = "Плівка чорна 100мкм", Price = 22},
+                new PriceList_Model{Name = "Плівка біла 200мкм 50м", Price = 25},
+                new PriceList_Model{Name = "Плівка біла 150мкм", Price = 30},
+                new PriceList_Model{Name = "Плівка біла 120мкм", Price = 28},
+                new PriceList_Model{Name = "Плівка біла 100мкм", Price = 25},
+                new PriceList_Model{Name = "Агроволокно чорне", Price = 50},
+                new PriceList_Model{Name = "Сітка москітна", Price = 20},
+                new PriceList_Model{Name = "Сітка на огірки", Price = 26},
+                new PriceList_Model{Name = "Клейонка на основі китай", Price = 22},
+                new PriceList_Model{Name = "Силікон", Price = 32}
             };
         }
         private List<Customers_Model> GetCustomersItems()
         {
             return new List<Customers_Model>()
             {
-                new Customers_Model("Test cutomer", "380692281337", "test@gmail.com", "Test address"),
-                new Customers_Model("Test cutomer2", "380692281337", "test@gmail.com", "Test address"),
-                new Customers_Model("Test cutomer3", "380692281337", "test@gmail.com", "Test address"),
-                new Customers_Model("Test cutomer4", "380692281337", "test@gmail.com", "Test address")
+                new Customers_Model("Іванов Володимир", "380692281337", "ivanov@gmail.com", "Соборна 14"),
+                new Customers_Model("Собіпан Андрій", "380501234567", "sobipan@gmail.com", "Князя Володимира 26"),
+                new Customers_Model("Галабурда Антон", "380637649264", "tipa-amerikos@gmail.com", "Фабрична 20"),
+                new Customers_Model("Поїжсуп Павло", "380679753027", "supchik@gmail.com", "Київська 109"),
+                new Customers_Model("Дубчак Володимир", "380507654321", "dub4ak.vlad@gmail.com", "Боярка 24"),
+                new Customers_Model("Непийводу Олег", "3809379286112", "olejka@gmail.com", " Вербова 38"),
+                new Customers_Model("Каба Михайло", "380999838615", "kaba@gmail.com", "Орлова 26")
             };
         }
         private List<Supplier_Model> GetSuppliersItems()
         {
             return new List<Supplier_Model>()
             {
-                new Supplier_Model("Test supplier", "380692281337", "test@gmail.com", "Test address"),
-                new Supplier_Model("Test supplier2", "380692281337", "test@gmail.com", "Test address"),
-                new Supplier_Model("Test supplier3", "380692281337", "test@gmail.com", "Test address"),
-                new Supplier_Model("Test supplier4", "380692281337", "test@gmail.com", "Test address")
+                new Supplier_Model("Іванов Олексій", "380692286969", "ivanov@gmail.com", "Млинівська 10"),
+                new Supplier_Model("Нікітський Андрій", "380501254367", "nekit.andrey@gmail.com", "Будівельників 3"),
+                new Supplier_Model("Перекотиполе Антон", "380637683764", "pokotilsya@gmail.com", "Євгена Коновальця 34"),
+                new Supplier_Model("Неїжборщ Павло", "380679701827", "no.borsch@gmail.com", "Князя Романа 16"),
+                new Supplier_Model("Ковалевський Володимир", "380501376321", "koval.vlad@gmail.com", "Гагаріна 45"),
+                new Supplier_Model("Попийводу Олег", "3809379985612", "vodicheski@gmail.com", " Вавилова 25"),
+                new Supplier_Model("Кабан Михайло", "380999867455", "kaban@gmail.com", "Курчатова 32")
             };
         }
         #region PriceList
